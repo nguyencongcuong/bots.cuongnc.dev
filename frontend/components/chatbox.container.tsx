@@ -3,11 +3,20 @@
 import { useStream } from '@langchain/react';
 import { SendTwoTone } from '@mui/icons-material';
 import { Box, Container, Grid, IconButton, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { MessageBlock } from './message-block';
 
 export function ChatBoxContainer() {
-  const [input, setInput] = useState('');
+  const {
+    setValue,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      message: '',
+    },
+  });
 
   // TODO: Support multiple threads
   const threadId = '27078180-8fd5-4402-a4d6-99c5e4a3498f';
@@ -17,11 +26,11 @@ export function ChatBoxContainer() {
     threadId: threadId,
   });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setInput('');
-    const text = input.trim();
+  const onSubmit = async (data: { message: string }) => {
+    const text = data.message.trim();
     if (!text || stream.isLoading) return;
+
+    setValue('message', '');
 
     // anthropic requires content to be a string (or content-block array),
     // never a plain object — that throws "content is not iterable".
@@ -106,14 +115,15 @@ export function ChatBoxContainer() {
             padding: 2,
           }}
         >
-          <Box component="form" onSubmit={handleSubmit}>
+          <Box component="form" onSubmit={handleSubmit(onSubmit)}>
             <TextField
+              {...register('message')}
               fullWidth
               label="Message"
               placeholder={'Ask me anything...'}
               variant="outlined"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              error={!!errors.message}
+              helperText={errors.message?.message}
               slotProps={{
                 input: {
                   endAdornment: (
