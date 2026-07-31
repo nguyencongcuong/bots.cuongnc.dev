@@ -69,9 +69,30 @@ export function ChatBoxContainer() {
           disableGutters={true}
         >
           <Stack direction="column" spacing={1}>
-            {stream.messages.map((message) => (
-              <MessageBlock key={message.id} message={message} />
-            ))}
+            {stream.messages.map((message, index) => {
+              const isLatestHuman =
+                message.type === 'human' && stream.messages.slice(index + 1).every((m) => m.type !== 'human');
+
+              return (
+                <MessageBlock
+                  key={message.id}
+                  message={message}
+                  // Pin while a reply is in flight so history load doesn't jump.
+                  pinToTop={isLatestHuman && stream.isLoading}
+                />
+              );
+            })}
+            {/*
+              Spacer so the latest user message can scroll to the top
+              (Gemini-style). Without this, block:"start" has nothing to scroll into.
+            */}
+            <Box
+              aria-hidden
+              sx={{
+                flexShrink: 0,
+                minHeight: 'calc(100vh - 100px - 96px)',
+              }}
+            />
           </Stack>
         </Container>
 
