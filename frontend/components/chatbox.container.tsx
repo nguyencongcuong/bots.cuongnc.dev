@@ -8,10 +8,13 @@ import { MessageBlock } from './message-block';
 
 export function ChatBoxContainer() {
   const [input, setInput] = useState('');
+
+  // TODO: Support multiple threads
+  const threadId = '27078180-8fd5-4402-a4d6-99c5e4a3498f';
   const stream = useStream({
     apiUrl: process.env.NEXT_PUBLIC_API_URL,
     assistantId: 'agent',
-    threadId: 'thread_1',
+    threadId: threadId,
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
