@@ -60,15 +60,18 @@ export function ChatBoxContainer() {
         sx={{
           display: {
             xs: 'none',
-            lg: 'block',
+            lg: 'flex',
           },
+          flexDirection: 'column',
+          height: '100vh',
+          overflowY: 'auto',
+          p: 2,
         }}
       >
         <Stack direction="column" spacing={2}>
           <CTA />
           <PromptSuggestions
             onTap={(suggestion) => {
-              // messageInputRef.current?.focus();
               setValue('message', suggestion);
             }}
           />
