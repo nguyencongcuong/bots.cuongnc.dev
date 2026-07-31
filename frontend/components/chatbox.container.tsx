@@ -11,7 +11,7 @@ export function ChatBoxContainer() {
   const stream = useStream({
     apiUrl: process.env.NEXT_PUBLIC_API_URL,
     assistantId: 'agent',
-    // omit threadId so the sdk creates a valid uuid thread
+    threadId: 'thread_1',
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -65,9 +65,11 @@ export function ChatBoxContainer() {
           }}
           disableGutters={true}
         >
-          {stream.messages.map((message) => (
-            <MessageBlock key={message.id} message={message} />
-          ))}
+          <Stack direction="column" spacing={1}>
+            {stream.messages.map((message) => (
+              <MessageBlock key={message.id} message={message} />
+            ))}
+          </Stack>
         </Container>
 
         <Stack

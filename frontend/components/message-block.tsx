@@ -10,8 +10,10 @@ interface MessageBlockProps {
 }
 
 export function MessageBlock({ message }: MessageBlockProps) {
-  const isHuman = message instanceof HumanMessage;
+  if (!message.text.trim()) return null;
+  if (message.type !== 'human' && message.type !== 'ai') return null;
 
+  const isHuman = message instanceof HumanMessage;
   return (
     <Box
       sx={{
