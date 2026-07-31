@@ -1,20 +1,20 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "npm run dev",
-            "type": "shell",
-            "command": "npm",
-            "args": ["run", "dev"],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "runOptions": {
-                "instanceLimit": 1,
-                "reevaluateOnRerun": true,
-                "runOn": "folderOpen"
-            }
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm run frontend:dev",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "frontend:dev"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "runOptions": {
+        "instanceLimit": 1,
+        "reevaluateOnRerun": true,
+        "runOn": "folderOpen"
+      }
+    }
+  ]
 }

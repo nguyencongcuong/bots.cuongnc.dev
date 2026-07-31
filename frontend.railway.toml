@@ -1,0 +1,8 @@
+[build]
+builder = "railpack"
+buildCommand = "npm run build -w frontend"
+watchPatterns = ["frontend/**", "frontend.railway.toml"]
+
+[deploy]
+startCommand = "npm run start -w frontend"
+healthcheckTimeout = 100

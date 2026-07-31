@@ -1,44 +1,28 @@
 {
   "name": "bots.cuongnc.dev",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/nguyencongcuong/bots.cuongnc.dev#readme",
+  "bugs": {
+    "url": "https://github.com/nguyencongcuong/bots.cuongnc.dev/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nguyencongcuong/bots.cuongnc.dev.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
   "scripts": {
-    "dev": "next dev --port 3005",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:start": "cd frontend && npm run start"
   },
-  "dependencies": {
-    "@emotion/cache": "^11.14.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@langchain/anthropic": "^1.5.2",
-    "@langchain/core": "^1.2.4",
-    "@mui/icons-material": "^9.2.0",
-    "@mui/material": "^9.2.0",
-    "@mui/material-nextjs": "^9.1.1",
-    "deepagents": "^1.12.0",
-    "langchain": "^1.5.4",
-    "next": "16.2.12",
-    "prettier": "^3.9.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "zod": "^4.4.3"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.12",
-    "typescript": "^5"
-  },
-  "ignoreScripts": [
-    "sharp",
-    "unrs-resolver"
+  "workspaces": [
+    "frontend"
   ],
-  "trustedDependencies": [
-    "sharp",
-    "unrs-resolver"
-  ]
+  "dependencies": {
+    "prettier": "^3.9.6"
+  }
 }
