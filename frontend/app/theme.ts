@@ -61,6 +61,11 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+      },
+    },
     MuiDivider: {
       defaultProps: {
         flexItem: true,

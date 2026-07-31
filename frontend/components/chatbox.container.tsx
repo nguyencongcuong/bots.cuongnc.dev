@@ -4,7 +4,9 @@ import { useStream } from '@langchain/react';
 import { SendTwoTone } from '@mui/icons-material';
 import { Box, Container, Grid, IconButton, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { CTA } from './cta';
 import { MessageBlock } from './message-block';
+import { Technologies } from './technologies';
 
 export function ChatBoxContainer() {
   const {
@@ -45,7 +47,7 @@ export function ChatBoxContainer() {
   };
 
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid
         component={Paper}
         size={{
@@ -59,7 +61,10 @@ export function ChatBoxContainer() {
           },
         }}
       >
-        <Typography>Left Sidebar</Typography>
+        <Stack direction="column" spacing={2}>
+          <CTA />
+          <Technologies />
+        </Stack>
       </Grid>
 
       <Grid
