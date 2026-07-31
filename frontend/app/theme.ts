@@ -74,35 +74,6 @@ const theme = createTheme({
         gutterBottom: true,
       },
     },
-    MuiList: {
-      defaultProps: {
-        disablePadding: true,
-        dense: false,
-        sx: {
-          py: 0,
-        },
-      },
-    },
-    MuiListItem: {
-      defaultProps: {
-        disablePadding: true,
-        dense: false,
-        disableGutters: true,
-        sx: {
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          py: 0,
-        },
-      },
-    },
-    MuiListItemText: {
-      defaultProps: {
-        sx: {
-          my: 0,
-        },
-      },
-    },
   },
 });
 

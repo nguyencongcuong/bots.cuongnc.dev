@@ -1,14 +1,12 @@
 'use client';
 
 import { BaseMessage, HumanMessage } from '@langchain/core/messages';
-import { ListAlt } from '@mui/icons-material';
 import {
   Box,
   Divider,
   Link,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Table,
   TableBody,
@@ -80,13 +78,18 @@ export function MessageBlock({ message, pinToTop = false }: MessageBlockProps) {
               th: ({ children }) => <TableCell>{children}</TableCell>,
               td: ({ children }) => <TableCell>{children}</TableCell>,
               p: ({ children }) => <Typography>{children}</Typography>,
-              ul: ({ children }) => <List>{children}</List>,
-              ol: ({ children }) => <List>{children}</List>,
+              ul: ({ children }) => (
+                <List component={'ul'} sx={{ listStyleType: 'disc', pl: 2 }}>
+                  {children}
+                </List>
+              ),
+              ol: ({ children }) => (
+                <List component={'ol'} sx={{ listStyleType: 'decimal', pl: 2 }}>
+                  {children}
+                </List>
+              ),
               li: ({ children }) => (
-                <ListItem>
-                  <ListItemIcon>
-                    <ListAlt />
-                  </ListItemIcon>
+                <ListItem component={'li'} disablePadding={true} sx={{ display: 'list-item' }}>
                   <ListItemText>{children}</ListItemText>
                 </ListItem>
               ),
