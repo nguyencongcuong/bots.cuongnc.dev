@@ -1,5 +1,5 @@
-import { Button } from '@mui/material';
+import { Chat } from '@/components/chat';
 
 export default function Home() {
-  return <Button>Hello World</Button>;
+  return <Chat />;
 }
