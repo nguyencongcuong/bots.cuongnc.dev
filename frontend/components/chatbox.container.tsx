@@ -4,6 +4,7 @@ import { useStream } from '@langchain/react';
 import { SendTwoTone } from '@mui/icons-material';
 import { Box, Container, Grid, IconButton, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
+import { MessageBlock } from './message-block';
 
 export function ChatBoxContainer() {
   const [input, setInput] = useState('');
@@ -65,9 +66,7 @@ export function ChatBoxContainer() {
           disableGutters={true}
         >
           {stream.messages.map((message) => (
-            <div key={message.id}>
-              <Typography>{message.text}</Typography>
-            </div>
+            <MessageBlock key={message.id} message={message} />
           ))}
         </Container>
 
@@ -85,6 +84,7 @@ export function ChatBoxContainer() {
             <TextField
               fullWidth
               label="Message"
+              placeholder={'Ask me anything...'}
               variant="outlined"
               value={input}
               onChange={(e) => setInput(e.target.value)}
