@@ -1,7 +1,22 @@
 'use client';
 
 import { BaseMessage, HumanMessage } from '@langchain/core/messages';
-import { Box } from '@mui/material';
+import { ListAlt } from '@mui/icons-material';
+import {
+  Box,
+  Divider,
+  Link,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
 import { useEffect, useRef } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -55,7 +70,51 @@ export function MessageBlock({ message, pinToTop = false }: MessageBlockProps) {
             padding: 1,
           }}
         >
-          <Markdown remarkPlugins={[remarkGfm]}>{message.text}</Markdown>
+          <Markdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              table: ({ children }) => <Table>{children}</Table>,
+              thead: ({ children }) => <TableHead>{children}</TableHead>,
+              tbody: ({ children }) => <TableBody>{children}</TableBody>,
+              tr: ({ children }) => <TableRow>{children}</TableRow>,
+              th: ({ children }) => <TableCell>{children}</TableCell>,
+              td: ({ children }) => <TableCell>{children}</TableCell>,
+              p: ({ children }) => <Typography>{children}</Typography>,
+              ul: ({ children }) => <List>{children}</List>,
+              ol: ({ children }) => <List>{children}</List>,
+              li: ({ children }) => (
+                <ListItem>
+                  <ListItemAvatar>
+                    <ListAlt />
+                  </ListItemAvatar>
+                  <ListItemText>{children}</ListItemText>
+                </ListItem>
+              ),
+              a: ({ children, href }) => <Link href={href}>{children}</Link>,
+              hr: () => <Divider />,
+              pre: ({ children }) => (
+                <Box
+                  component="pre"
+                  sx={{
+                    backgroundColor: 'grey.200',
+                    padding: 2,
+                    borderRadius: 5,
+                    whiteSpace: 'pre-wrap',
+                  }}
+                >
+                  {children}
+                </Box>
+              ),
+              h1: ({ children }) => <Typography variant="h1">{children}</Typography>,
+              h2: ({ children }) => <Typography variant="h2">{children}</Typography>,
+              h3: ({ children }) => <Typography variant="h3">{children}</Typography>,
+              h4: ({ children }) => <Typography variant="h4">{children}</Typography>,
+              h5: ({ children }) => <Typography variant="h5">{children}</Typography>,
+              h6: ({ children }) => <Typography variant="h6">{children}</Typography>,
+            }}
+          >
+            {message.text}
+          </Markdown>
         </Box>
       </Box>
     </Box>
