@@ -18,6 +18,7 @@ import {
 import { useEffect, useRef } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { CodeBlock } from './code-block';
 
 interface MessageBlockProps {
   message: BaseMessage;
@@ -99,14 +100,14 @@ export function MessageBlock({ message, pinToTop = false }: MessageBlockProps) {
                 <Box
                   component="pre"
                   sx={{
-                    backgroundColor: 'grey.200',
-                    padding: 2,
-                    borderRadius: 5,
                     whiteSpace: 'pre-wrap',
                   }}
                 >
                   {children}
                 </Box>
+              ),
+              code: ({ children, className }) => (
+                <CodeBlock className={className} content={children?.toString() ?? ''} />
               ),
               h1: ({ children }) => <Typography variant="h1">{children}</Typography>,
               h2: ({ children }) => <Typography variant="h2">{children}</Typography>,
