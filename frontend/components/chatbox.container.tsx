@@ -3,16 +3,18 @@
 import { useStream } from '@langchain/react';
 import { SendTwoTone } from '@mui/icons-material';
 import { Box, Container, Grid, IconButton, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material';
-import { useForm } from 'react-hook-form';
+import { useRef } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { CTA } from './cta';
 import { MessageBlock } from './message-block';
+import { PromptSuggestions } from './prompt-suggestions';
 import { Technologies } from './technologies';
 
 export function ChatBoxContainer() {
   const {
     setValue,
     handleSubmit,
-    register,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -22,6 +24,7 @@ export function ChatBoxContainer() {
 
   // TODO: Support multiple threads
   const threadId = '27078180-8fd5-4402-a4d6-99c5e4a3498f';
+  const messageInputRef = useRef<HTMLInputElement>(null);
   const stream = useStream({
     apiUrl: process.env.NEXT_PUBLIC_API_URL,
     assistantId: 'agent',
@@ -63,6 +66,12 @@ export function ChatBoxContainer() {
       >
         <Stack direction="column" spacing={2}>
           <CTA />
+          <PromptSuggestions
+            onTap={(suggestion) => {
+              // messageInputRef.current?.focus();
+              setValue('message', suggestion);
+            }}
+          />
           <Technologies />
         </Stack>
       </Grid>
@@ -121,25 +130,32 @@ export function ChatBoxContainer() {
           }}
         >
           <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-            <TextField
-              {...register('message')}
-              fullWidth
-              label="Message"
-              placeholder={'Ask me anything...'}
-              variant="outlined"
-              error={!!errors.message}
-              helperText={errors.message?.message}
-              slotProps={{
-                input: {
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton type="submit">
-                        <SendTwoTone />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                },
-              }}
+            <Controller
+              control={control}
+              name="message"
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  ref={messageInputRef}
+                  fullWidth
+                  label="Message"
+                  placeholder={'Ask me anything...'}
+                  variant="outlined"
+                  error={!!errors.message}
+                  helperText={errors.message?.message}
+                  slotProps={{
+                    input: {
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton type="submit">
+                            <SendTwoTone />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    },
+                  }}
+                />
+              )}
             />
           </Box>
         </Stack>
