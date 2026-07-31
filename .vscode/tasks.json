@@ -2,6 +2,21 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "npm run backend:dev",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "backend:dev"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "runOptions": {
+        "instanceLimit": 1,
+        "reevaluateOnRerun": true,
+        "runOn": "folderOpen"
+      }
+    },
+    {
       "label": "npm run frontend:dev",
       "type": "shell",
       "command": "npm",

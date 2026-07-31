@@ -1,7 +1,7 @@
 {
   "name": "bots.cuongnc.dev",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bots for Nguyen Cong Cuong",
   "homepage": "https://github.com/nguyencongcuong/bots.cuongnc.dev#readme",
   "bugs": {
     "url": "https://github.com/nguyencongcuong/bots.cuongnc.dev/issues"
@@ -11,16 +11,18 @@
     "url": "git+https://github.com/nguyencongcuong/bots.cuongnc.dev.git"
   },
   "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
+  "author": "Nguyen Cong Cuong",
   "scripts": {
     "frontend:dev": "cd frontend && npm run dev",
     "frontend:build": "cd frontend && npm run build",
-    "frontend:start": "cd frontend && npm run start"
+    "frontend:start": "cd frontend && npm run start",
+    "backend:dev": "cd backend && npm run dev",
+    "backend:build": "cd backend && npm run build",
+    "backend:start": "cd backend && npm run start"
   },
   "workspaces": [
-    "frontend"
+    "frontend",
+    "backend"
   ],
   "dependencies": {
     "prettier": "^3.9.6"
