@@ -16,14 +16,14 @@ const roboto = Roboto({
   variable: '--font-roboto',
 });
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface Props {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className={roboto.className}>
-      <body className="min-h-full flex flex-col">
+      <body>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </AppRouterCacheProvider>
