@@ -1,5 +1,6 @@
 const { FlatCompat } = require("@eslint/eslintrc");
 const js = require("@eslint/js");
+const path = require("node:path");
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
@@ -29,7 +30,8 @@ module.exports = [
     parser: "@typescript-eslint/parser",
     parserOptions: {
       ecmaVersion: 12,
-      project: "./tsconfig.json",
+      project: path.join(__dirname, "tsconfig.json"),
+      tsconfigRootDir: __dirname,
       sourceType: "module",
     },
     plugins: ["import", "@typescript-eslint", "no-instanceof"],
@@ -49,7 +51,11 @@ module.exports = [
       "import/extensions": [2, "ignorePackages"],
       "import/no-extraneous-dependencies": [
         "error",
-        { devDependencies: ["**/*.test.ts"] },
+        {
+          // resolve against backend/package.json even when eslint cwd is the monorepo root
+          packageDir: __dirname,
+          devDependencies: ["**/*.test.ts"],
+        },
       ],
       "import/no-unresolved": 0,
       "import/prefer-default-export": 0,
