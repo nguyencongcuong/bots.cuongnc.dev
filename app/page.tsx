@@ -1,7 +1,5 @@
-import { Button } from "@mui/material";
+import { Button } from '@mui/material';
 
 export default function Home() {
-  return (
-    <Button>Hello World</Button>
-  );
+  return <Button>Hello World</Button>;
 }
