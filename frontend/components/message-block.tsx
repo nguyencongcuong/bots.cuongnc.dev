@@ -46,8 +46,8 @@ export function MessageBlock({ message, pinToTop = false }: MessageBlockProps) {
       >
         <Box
           sx={{
-            backgroundColor: isHuman ? 'secondary.light' : 'primary.main',
-            color: isHuman ? 'secondary.dark' : 'primary.contrastText',
+            backgroundColor: isHuman ? 'secondary.light' : undefined,
+            color: isHuman ? 'secondary.dark' : undefined,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             borderBottomLeftRadius: isHuman ? 20 : 0,
