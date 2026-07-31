@@ -1,5 +1,5 @@
-import { Chat } from '@/components/chat';
+import { ChatBoxContainer } from '@/components/chatbox.container';
 
 export default function Home() {
-  return <Chat />;
+  return <ChatBoxContainer />;
 }
