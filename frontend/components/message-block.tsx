@@ -8,7 +8,7 @@ import {
   Link,
   List,
   ListItem,
-  ListItemAvatar,
+  ListItemIcon,
   ListItemText,
   Table,
   TableBody,
@@ -84,9 +84,9 @@ export function MessageBlock({ message, pinToTop = false }: MessageBlockProps) {
               ol: ({ children }) => <List>{children}</List>,
               li: ({ children }) => (
                 <ListItem>
-                  <ListItemAvatar>
+                  <ListItemIcon>
                     <ListAlt />
-                  </ListItemAvatar>
+                  </ListItemIcon>
                   <ListItemText>{children}</ListItemText>
                 </ListItem>
               ),

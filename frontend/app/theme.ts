@@ -89,6 +89,9 @@ const theme = createTheme({
         dense: false,
         disableGutters: true,
         sx: {
+          display: 'flex',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
           py: 0,
         },
       },
