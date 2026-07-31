@@ -50,7 +50,7 @@ export function ChatBoxContainer() {
         component={Paper}
         size={{
           xs: 12,
-          lg: 2,
+          lg: 3,
         }}
         sx={{
           display: {
@@ -66,7 +66,7 @@ export function ChatBoxContainer() {
         component={Paper}
         size={{
           xs: 12,
-          lg: 8,
+          lg: 6,
         }}
       >
         <Container
@@ -144,7 +144,7 @@ export function ChatBoxContainer() {
         component={Paper}
         size={{
           xs: 12,
-          lg: 2,
+          lg: 3,
         }}
         sx={{
           display: {
