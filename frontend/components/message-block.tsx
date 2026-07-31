@@ -2,6 +2,8 @@
 
 import { BaseMessage, HumanMessage } from '@langchain/core/messages';
 import { Box } from '@mui/material';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface MessageBlockProps {
   message: BaseMessage;
@@ -37,7 +39,7 @@ export function MessageBlock({ message }: MessageBlockProps) {
             padding: 1,
           }}
         >
-          {message.text}
+          <Markdown remarkPlugins={[remarkGfm]}>{message.text}</Markdown>
         </Box>
       </Box>
     </Box>
