@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, List, ListItem, ListItemText } from '@mui/material';
+import { Chip, Stack } from '@mui/material';
 
 interface Props {
   onTap: (suggestion: string) => void;
@@ -14,17 +14,18 @@ export function PromptSuggestions({ onTap }: Props) {
   ];
 
   return (
-    <Card>
-      <CardHeader title="Prompt Suggestions" />
-      <CardContent>
-        <List dense disablePadding>
-          {suggestions.map((suggestion) => (
-            <ListItem key={suggestion.message} onClick={() => onTap(suggestion.message)} sx={{ cursor: 'pointer' }}>
-              <ListItemText primary={suggestion.message} />
-            </ListItem>
-          ))}
-        </List>
-      </CardContent>
-    </Card>
+    <Stack direction="row" spacing={1} sx={{ overflowX: 'auto' }}>
+      {suggestions.map((suggestion) => (
+        <Chip
+          key={suggestion.message}
+          label={suggestion.message}
+          variant="outlined"
+          color="primary"
+          size="small"
+          onClick={() => onTap(suggestion.message)}
+          sx={{ cursor: 'pointer' }}
+        />
+      ))}
+    </Stack>
   );
 }

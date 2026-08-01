@@ -1,5 +1,7 @@
 'use client';
 
+import { MessageBlock } from '@/components/message-block';
+import { PromptSuggestions } from '@/components/prompt-suggestions';
 import { Tables } from '@/types/database.types';
 import { useStream } from '@langchain/react';
 import { SendTwoTone } from '@mui/icons-material';
@@ -19,7 +21,6 @@ import {
 } from '@mui/material';
 import { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { MessageBlock } from './message-block';
 
 interface HitlActionRequest {
   name: string;
@@ -84,7 +85,7 @@ export function ChatBoxContainer({ thread }: Props) {
     <Box>
       <Container
         sx={{
-          height: 'calc(100vh - 100px)',
+          height: 'calc(100vh - 150px)',
           overflow: 'auto',
           padding: 4,
         }}
@@ -159,22 +160,15 @@ export function ChatBoxContainer({ thread }: Props) {
             aria-hidden
             sx={{
               flexShrink: 0,
-              minHeight: 'calc(100vh - 100px - 96px)',
+              minHeight: 'calc(100vh - 150px - 90px)',
             }}
           />
         </Stack>
       </Container>
 
-      <Stack
-        direction="column"
-        spacing={2}
-        sx={{
-          width: '100%',
-          justifyContent: 'flex-end',
-          minHeight: '100px',
-          padding: 2,
-        }}
-      >
+      <Stack direction="column" spacing={2} sx={{ px: 2 }}>
+        <PromptSuggestions onTap={(suggestion) => setValue('message', suggestion)} />
+
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
           <Controller
             control={control}
