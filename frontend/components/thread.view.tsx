@@ -24,7 +24,10 @@ export function ThreadView({ thread }: Props) {
 
   // Update drawer
   const [updateDrawerOpen, setUpdateDrawerOpen] = useState(false);
-  const handleUpdateDrawerOpen = () => setUpdateDrawerOpen(true);
+  const handleUpdateDrawerOpen = () => {
+    setAnchorEl(null);
+    setUpdateDrawerOpen(true);
+  };
   const handleUpdateDrawerClose = () => setUpdateDrawerOpen(false);
 
   return (
