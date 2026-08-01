@@ -5,7 +5,7 @@
       "label": "run backend",
       "type": "shell",
       "command": "npm",
-      "args": ["run", "start", "-w", "backend"],
+      "args": ["run", "dev", "-w", "backend"],
       "group": {
         "kind": "build",
         "isDefault": true
@@ -20,7 +20,7 @@
       "label": "run frontend",
       "type": "shell",
       "command": "npm",
-      "args": ["run", "start", "-w", "frontend"],
+      "args": ["run", "dev", "-w", "frontend"],
       "group": {
         "kind": "build",
         "isDefault": true
