@@ -176,6 +176,7 @@ export function ChatBoxContainer({ thread }: Props) {
             render={({ field }) => (
               <TextField
                 {...field}
+                autoFocus={true}
                 ref={messageInputRef}
                 fullWidth
                 label="Message"
