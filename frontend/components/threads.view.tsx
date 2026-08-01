@@ -16,7 +16,7 @@ export function ThreadsView({ threads }: Props) {
       <CardContent>
         <Stack direction="column" spacing={2}>
           <ThreadAddButton />
-          <List>
+          <List dense disablePadding>
             {threads.map((thread) => (
               <ThreadView key={thread.id} thread={thread} />
             ))}

@@ -4,7 +4,7 @@ import { Tables } from '@/types/database.types';
 import { MoreVert } from '@mui/icons-material';
 import { colors, IconButton, ListItem, Menu, Stack } from '@mui/material';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { ThreadDeleteMenuItem } from './thread.delete.menu.item';
 
@@ -15,7 +15,6 @@ interface Props {
 export function ThreadView({ thread }: Props) {
   const pathname = usePathname();
   const activeThreadId = pathname.split('/').pop() ?? '';
-  const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -24,6 +23,7 @@ export function ThreadView({ thread }: Props) {
 
   return (
     <ListItem
+      dense
       key={thread.id}
       sx={{
         backgroundColor: thread.id === activeThreadId ? colors.grey[200] : 'transparent',
