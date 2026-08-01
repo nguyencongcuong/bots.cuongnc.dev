@@ -2,11 +2,12 @@
 
 import { Tables } from '@/types/database.types';
 import { MoreVert } from '@mui/icons-material';
-import { colors, IconButton, ListItem, Menu, Stack } from '@mui/material';
+import { colors, IconButton, ListItem, Menu, MenuItem, Stack } from '@mui/material';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { ThreadDeleteMenuItem } from './thread.delete.menu.item';
+import { ThreadUpdateDrawer } from './thread.update.drawer';
 
 interface Props {
   thread: Tables<'threads'>;
@@ -20,6 +21,11 @@ export function ThreadView({ thread }: Props) {
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  // Update drawer
+  const [updateDrawerOpen, setUpdateDrawerOpen] = useState(false);
+  const handleUpdateDrawerOpen = () => setUpdateDrawerOpen(true);
+  const handleUpdateDrawerClose = () => setUpdateDrawerOpen(false);
 
   return (
     <ListItem
@@ -51,8 +57,11 @@ export function ThreadView({ thread }: Props) {
           },
         }}
       >
+        <MenuItem onClick={handleUpdateDrawerOpen}>Rename Thread</MenuItem>
         <ThreadDeleteMenuItem threadId={thread.id} onDelete={handleClose} />
       </Menu>
+
+      <ThreadUpdateDrawer thread={thread} open={updateDrawerOpen} onClose={handleUpdateDrawerClose} />
     </ListItem>
   );
 }

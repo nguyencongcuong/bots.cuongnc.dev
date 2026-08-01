@@ -28,10 +28,10 @@ export async function insertThread(thread: TablesInsert<'threads'>) {
   return data;
 }
 
-export async function updateThread(thread: TablesUpdate<'threads'>) {
+export async function updateThread(id: string, thread: TablesUpdate<'threads'>) {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
-  const { data } = await supabase.from('threads').update(thread).select().single().throwOnError();
+  const { data } = await supabase.from('threads').update(thread).eq('id', id).select().single().throwOnError();
   revalidatePath('/', 'page');
   return data;
 }
