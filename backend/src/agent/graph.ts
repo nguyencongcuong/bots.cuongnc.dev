@@ -1,5 +1,5 @@
 import { ChatAnthropic } from '@langchain/anthropic';
-import { createAgent } from 'langchain';
+import { createAgent, humanInTheLoopMiddleware } from 'langchain';
 import { internetSearchTool } from './tools.js';
 
 const agent = createAgent({
@@ -8,6 +8,19 @@ const agent = createAgent({
   }),
   tools: [internetSearchTool],
   name: 'bots.cuongnc.dev',
+  middleware: [
+    humanInTheLoopMiddleware({
+      interruptOn: {
+        internet_search: {
+          allowedDecisions: ['approve', 'reject'],
+          description: (toolCall) => {
+            const query = String(toolCall.args?.query ?? '');
+            return `Allow web search with query: ${query}?`;
+          },
+        },
+      },
+    }),
+  ],
 });
 
 // langgraph.json expects a compiled StateGraph

@@ -19,7 +19,7 @@ export function PromptSuggestions({ onTap }: Props) {
       <CardContent>
         <List dense disablePadding>
           {suggestions.map((suggestion) => (
-            <ListItem key={suggestion.message} onClick={() => onTap(suggestion.message)}>
+            <ListItem key={suggestion.message} onClick={() => onTap(suggestion.message)} sx={{ cursor: 'pointer' }}>
               <ListItemText primary={suggestion.message} />
             </ListItem>
           ))}

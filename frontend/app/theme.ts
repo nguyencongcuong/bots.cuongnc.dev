@@ -61,6 +61,23 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiCardHeader: {
+      styleOverrides: {
+        title: {
+          fontSize: '1rem',
+          fontWeight: 700,
+        },
+        subheader: {
+          fontSize: '0.875rem',
+          fontWeight: 400,
+        },
+      },
+    },
+    MuiButtonGroup: {
+      defaultProps: {
+        disableElevation: true,
+      },
+    },
     MuiButton: {
       defaultProps: {
         disableElevation: true,

@@ -2,13 +2,42 @@
 
 import { useStream } from '@langchain/react';
 import { SendTwoTone } from '@mui/icons-material';
-import { Box, Container, Grid, IconButton, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Card,
+  CardContent,
+  CardHeader,
+  Container,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { CTA } from './cta';
 import { MessageBlock } from './message-block';
 import { PromptSuggestions } from './prompt-suggestions';
 import { Technologies } from './technologies';
+
+interface HitlActionRequest {
+  name: string;
+  action_name: string;
+  description: string;
+  args: {
+    query: string;
+    maxResults: number;
+    topic: string;
+    includeRawContent: boolean;
+    searchDepth: string;
+    timeRange: string;
+  };
+}
 
 export function ChatBoxContainer() {
   const {
@@ -23,7 +52,7 @@ export function ChatBoxContainer() {
   });
 
   // TODO: Support multiple threads
-  const threadId = '27078180-8fd5-4402-a4d6-99c5e4a3498f';
+  const threadId = '35d11de2-48c8-493f-b9a1-7d67c02ec1b0';
   const messageInputRef = useRef<HTMLInputElement>(null);
   const stream = useStream({
     apiUrl: process.env.NEXT_PUBLIC_API_URL,
@@ -49,6 +78,9 @@ export function ChatBoxContainer() {
     });
   };
 
+  const hitlActionRequests = stream.interrupt?.value
+    ? (stream.interrupt.value as { action_requests: HitlActionRequest[] }).action_requests
+    : [];
   return (
     <Grid container spacing={2}>
       <Grid
@@ -108,6 +140,53 @@ export function ChatBoxContainer() {
                 />
               );
             })}
+
+            {stream.interrupt ? (
+              <Card>
+                <CardHeader
+                  title="Some actions require your approval"
+                  subheader={hitlActionRequests.map((a) => a.name).join(' • ')}
+                />
+                <CardContent>
+                  {hitlActionRequests.map((action) => {
+                    return (
+                      <Stack key={action.name}>
+                        <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap' }}>
+                          {action.description}
+                        </Typography>
+                      </Stack>
+                    );
+                  })}
+                </CardContent>
+                <ButtonGroup fullWidth>
+                  <Button
+                    size={'small'}
+                    variant="text"
+                    color="primary"
+                    onClick={() => {
+                      void stream.respond({
+                        decisions: [{ type: 'approve' }],
+                      });
+                    }}
+                  >
+                    Approve
+                  </Button>
+                  <Button
+                    size={'small'}
+                    variant="text"
+                    color="error"
+                    onClick={() => {
+                      void stream.respond({
+                        decisions: [{ type: 'reject' }],
+                      });
+                    }}
+                  >
+                    Reject
+                  </Button>
+                </ButtonGroup>
+              </Card>
+            ) : null}
+
             {/*
               Spacer so the latest user message can scroll to the top
               (Gemini-style). Without this, block:"start" has nothing to scroll into.
@@ -128,7 +207,7 @@ export function ChatBoxContainer() {
           sx={{
             width: '100%',
             justifyContent: 'flex-end',
-            height: '100px',
+            minHeight: '100px',
             padding: 2,
           }}
         >
@@ -146,11 +225,12 @@ export function ChatBoxContainer() {
                   variant="outlined"
                   error={!!errors.message}
                   helperText={errors.message?.message}
+                  disabled={!!stream.interrupt}
                   slotProps={{
                     input: {
                       endAdornment: (
                         <InputAdornment position="end">
-                          <IconButton type="submit">
+                          <IconButton type="submit" disabled={!!stream.interrupt || stream.isLoading}>
                             <SendTwoTone />
                           </IconButton>
                         </InputAdornment>
@@ -175,9 +255,12 @@ export function ChatBoxContainer() {
             xs: 'none',
             lg: 'block',
           },
+          p: 2,
         }}
       >
-        <Typography>Right Sidebar</Typography>
+        <Typography variant="body2" color="text.secondary">
+          When the agent wants to search the web, approval appears above the message box.
+        </Typography>
       </Grid>
     </Grid>
   );
