@@ -12,14 +12,6 @@
   },
   "license": "ISC",
   "author": "Nguyen Cong Cuong",
-  "scripts": {
-    "frontend:dev": "cd frontend && npm run dev",
-    "frontend:build": "cd frontend && npm run build",
-    "frontend:start": "cd frontend && npm run start",
-    "backend:dev": "cd backend && npm run dev",
-    "backend:build": "cd backend && npm run build",
-    "backend:start": "cd backend && npm run start"
-  },
   "workspaces": [
     "frontend",
     "backend"

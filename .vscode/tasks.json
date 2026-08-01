@@ -2,10 +2,10 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "npm run backend:dev",
+      "label": "run backend",
       "type": "shell",
       "command": "npm",
-      "args": ["run", "backend:dev"],
+      "args": ["run", "start", "-w", "backend"],
       "group": {
         "kind": "build",
         "isDefault": true
@@ -17,10 +17,10 @@
       }
     },
     {
-      "label": "npm run frontend:dev",
+      "label": "run frontend",
       "type": "shell",
       "command": "npm",
-      "args": ["run", "frontend:dev"],
+      "args": ["run", "start", "-w", "frontend"],
       "group": {
         "kind": "build",
         "isDefault": true
