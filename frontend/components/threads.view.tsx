@@ -1,35 +1,26 @@
 'use client';
 
 import { ThreadAddButton } from '@/components/thread.add.button';
+import { ThreadView } from '@/components/thread.view';
 import { Tables } from '@/types/database.types';
-import { Card, CardContent, CardHeader, colors, MenuItem, MenuList, Stack } from '@mui/material';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Card, CardContent, CardHeader, List, Stack } from '@mui/material';
 
 interface Props {
   threads: Tables<'threads'>[];
 }
 
 export function ThreadsView({ threads }: Props) {
-  const pathname = usePathname();
-  const activeThreadId = pathname.split('/').pop() ?? '';
-
   return (
     <Card>
       <CardHeader title="Threads" />
       <CardContent>
         <Stack direction="column" spacing={2}>
           <ThreadAddButton />
-          <MenuList dense disableListWrap disablePadding>
+          <List>
             {threads.map((thread) => (
-              // identify active thread
-              <Link href={`/threads/${thread.id}`} key={thread.id}>
-                <MenuItem sx={{ backgroundColor: thread.id === activeThreadId ? colors.grey[200] : 'transparent' }}>
-                  {thread.name ?? thread.id}
-                </MenuItem>
-              </Link>
+              <ThreadView key={thread.id} thread={thread} />
             ))}
-          </MenuList>
+          </List>
         </Stack>
       </CardContent>
     </Card>

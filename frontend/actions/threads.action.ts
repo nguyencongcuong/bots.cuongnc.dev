@@ -4,6 +4,7 @@ import { TablesInsert, TablesUpdate } from '@/types/database.types';
 import { createClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export async function readThreads() {
   const cookieStore = await cookies();
@@ -15,7 +16,7 @@ export async function readThreads() {
 export async function readThread(id: string) {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
-  const { data: thread } = await supabase.from('threads').select('*').eq('id', id).single().throwOnError();
+  const { data: thread } = await supabase.from('threads').select('*').eq('id', id).single();
   return thread ?? null;
 }
 
@@ -40,4 +41,5 @@ export async function deleteThread(id: string) {
   const supabase = createClient(cookieStore);
   await supabase.from('threads').delete().eq('id', id).throwOnError();
   revalidatePath('/', 'page');
+  redirect('/threads');
 }
