@@ -96,6 +96,18 @@ const theme = createTheme({
         gutterBottom: true,
       },
     },
+    MuiCard: {
+      defaultProps: {
+        elevation: 0,
+        variant: 'outlined',
+      },
+    },
+    MuiPaper: {
+      defaultProps: {
+        elevation: 0,
+        variant: 'outlined',
+      },
+    },
   },
 });
 

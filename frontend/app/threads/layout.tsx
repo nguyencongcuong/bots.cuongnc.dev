@@ -10,7 +10,6 @@ export default async function ThreadsLayout({ children }: { children: React.Reac
   return (
     <Grid container spacing={2}>
       <Grid
-        component={Paper}
         size={{
           xs: 12,
           lg: 3,
@@ -23,7 +22,6 @@ export default async function ThreadsLayout({ children }: { children: React.Reac
           flexDirection: 'column',
           height: '100vh',
           overflowY: 'auto',
-          p: 2,
         }}
       >
         <Stack direction="column" spacing={2}>
