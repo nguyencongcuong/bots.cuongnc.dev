@@ -40,6 +40,9 @@ export async function deleteThread(id: string) {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
   await supabase.from('threads').delete().eq('id', id).throwOnError();
+
+  // TODO: Delete threads from langgraph
+
   revalidatePath('/', 'page');
   redirect('/threads');
 }
