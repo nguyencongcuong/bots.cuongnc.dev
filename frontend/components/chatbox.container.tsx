@@ -1,5 +1,6 @@
 'use client';
 
+import { Tables } from '@/types/database.types';
 import { useStream } from '@langchain/react';
 import { SendTwoTone } from '@mui/icons-material';
 import {
@@ -24,6 +25,7 @@ import { CTA } from './cta';
 import { MessageBlock } from './message-block';
 import { PromptSuggestions } from './prompt-suggestions';
 import { Technologies } from './technologies';
+import { ThreadsView } from './threads.view';
 
 interface HitlActionRequest {
   name: string;
@@ -39,7 +41,11 @@ interface HitlActionRequest {
   };
 }
 
-export function ChatBoxContainer() {
+interface Props {
+  threads: Tables<'threads'>[];
+}
+
+export function ChatBoxContainer({ threads }: Props) {
   const {
     setValue,
     handleSubmit,
@@ -102,6 +108,7 @@ export function ChatBoxContainer() {
       >
         <Stack direction="column" spacing={2}>
           <CTA />
+          <ThreadsView threads={threads} onSelect={(thread) => {}} />
           <PromptSuggestions
             onTap={(suggestion) => {
               setValue('message', suggestion);
