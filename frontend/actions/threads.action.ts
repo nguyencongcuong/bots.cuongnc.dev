@@ -12,6 +12,13 @@ export async function readThreads() {
   return threads ?? [];
 }
 
+export async function readThread(id: string) {
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+  const { data: thread } = await supabase.from('threads').select('*').eq('id', id).single().throwOnError();
+  return thread ?? null;
+}
+
 export async function insertThread(thread: TablesInsert<'threads'>) {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
