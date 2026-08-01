@@ -32,7 +32,9 @@ export function ThreadView({ thread }: Props) {
       }}
     >
       <Stack direction="row" spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-        <Link href={`/threads/${thread.id}`}>{thread.name ?? thread.id}</Link>
+        <Link href={`/threads/${thread.id}`} style={{ width: '100%' }}>
+          {thread.name ?? thread.id}
+        </Link>
         <IconButton onClick={handleClick}>
           <MoreVert />
         </IconButton>
