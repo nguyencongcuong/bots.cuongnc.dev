@@ -6,12 +6,14 @@ import { useTransition } from 'react';
 
 interface Props {
   threadId: string;
+  onDelete: () => void;
 }
 
-export function ThreadDeleteMenuItem({ threadId }: Props) {
+export function ThreadDeleteMenuItem({ threadId, onDelete }: Props) {
   const [isPending, startTransition] = useTransition();
 
   const handleClick = () => {
+    onDelete();
     startTransition(async () => {
       await deleteThread(threadId);
     });

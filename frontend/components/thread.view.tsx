@@ -51,7 +51,7 @@ export function ThreadView({ thread }: Props) {
           },
         }}
       >
-        <ThreadDeleteMenuItem threadId={thread.id} />
+        <ThreadDeleteMenuItem threadId={thread.id} onDelete={handleClose} />
       </Menu>
     </ListItem>
   );
