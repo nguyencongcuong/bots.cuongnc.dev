@@ -85,7 +85,7 @@ export function ChatBoxContainer({ thread }: Props) {
     <Box>
       <Container
         sx={{
-          height: 'calc(100vh - 150px)',
+          height: 'calc(100dvh - 150px)',
           overflow: 'auto',
           padding: 4,
         }}
@@ -160,7 +160,7 @@ export function ChatBoxContainer({ thread }: Props) {
             aria-hidden
             sx={{
               flexShrink: 0,
-              minHeight: 'calc(100vh - 150px - 90px)',
+              minHeight: 'calc(100dvh - 150px - 90px)',
             }}
           />
         </Stack>

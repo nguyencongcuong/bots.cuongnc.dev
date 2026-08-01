@@ -20,7 +20,7 @@ export default async function ThreadsLayout({ children }: { children: React.Reac
             lg: 'flex',
           },
           flexDirection: 'column',
-          height: '100vh',
+          height: '100dvh',
           overflowY: 'auto',
         }}
       >
